@@ -28,10 +28,6 @@ jobs:
             echo "$1"
             if [ -f "$1/package.json" ]; then
               cd "$1"; pwd
-              #echo "Updating version in $1/package.json"
-              #NEW_VERSION="${{ steps.version_info.outputs.NEW_VERSION }}"
-              #jq --arg newVersion "$NEW_VERSION" \'.version = $newVersion\' "package.json" > "/tmp/package.json"
-              #mv "/tmp/package.json" "package.json"
             fi
           ' _ {} \;
 
