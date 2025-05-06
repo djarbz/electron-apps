@@ -31,8 +31,10 @@ jobs:
               echo "Updating version in $1/package.json"
               NEW_VERSION="${{ steps.version_info.outputs.NEW_VERSION }}"
               echo "VERSION: ${NEW_VERSION}"
+              jq --arg newVersion "$NEW_VERSION" \'.version = $newVersion\' "package.json" > "/tmp/package.json"
             fi
           ' _ {} \;
+          exit 1
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
