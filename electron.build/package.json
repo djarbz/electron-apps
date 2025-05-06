@@ -5,6 +5,7 @@
   "author": {
     "name": "DJArbz"
   },
+  "license": "UNLICENSED",
   "packageManager": "yarn@1.22.22",
   "main": "app/index.js",
   "build": {
@@ -43,7 +44,7 @@
     "icon:download:linux": "wget -q https://coder.com/favicon-light.svg -O app/light.svg",
     "icon:download:win": "powershell -NoProfile -Command \"Invoke-WebRequest -Uri 'https:\/\/coder.com\/favicon-light.svg' -OutFile 'app\/light.svg'\"",
     "icon:download": "yarn icon:download:win",
-    "icon:convert": "convert -density 300 -resize 256 -background none app/light.svg app/icon.png",
+    "icon:convert": "magick.exe -density 300 -resize 256 -background none app/light.svg app/icon.png",
     "icon:update": "yarn icon:download && yarn icon:convert",
     "version:update": "exit 0; jq --arg newVersion $(date \"+%y.%m.%d+b%H%M\") '.version = $newVersion' package.json > temp.package.json && mv temp.package.json package.json",
     "build:pre": "tree && yarn icon:update && yarn version:update",
