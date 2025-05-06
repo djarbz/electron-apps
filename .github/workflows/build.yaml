@@ -11,6 +11,8 @@ on:
       - '.github/workflows/build.yaml'
       - '*/package.json'
       - '*/app/**'
+    tags:
+      - v*.*.*
 
 jobs:
   release:
