@@ -5,6 +5,11 @@
   "author": {
     "name": "DJArbz"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/djarbz/electron-apps.git",
+    "directory": "electron.build"
+  },
   "license": "UNLICENSED",
   "packageManager": "yarn@1.22.22",
   "main": "app/index.js",
