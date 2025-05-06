@@ -27,6 +27,7 @@ jobs:
           pwd
           tree
           find . -maxdepth 1 -type d -exec bash -c '
+            echo "$1"
             if [ -f "$1/package.json" ]; then
               echo "Updating version in $1/package.json"
               NEW_VERSION="${{ steps.version_info.outputs.NEW_VERSION }}"
