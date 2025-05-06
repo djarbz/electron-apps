@@ -1,7 +1,0 @@
-{
-  "name": "electron-apps",
-  "packageManager": "yarn@4.9.1",
-  "devDependencies": {
-    "electron-builder": "26.0.12"
-  }
-}

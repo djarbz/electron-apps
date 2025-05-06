@@ -40,7 +40,7 @@ jobs:
           find . -maxdepth 2 -type f -name "package.json" -print0 | while IFS= read -r -d $'\0' file; do
             cd "$(dirname "$file")"
             echo "Installing dependencies in $(pwd)"
-            yarn install --frozen-lockfile
+            yarn install --immutable-cache
             echo "-------------------------"
             cd - > /dev/null
           done
