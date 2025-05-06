@@ -24,15 +24,14 @@ jobs:
 
       - name: Bump version in package.json files
         run: |
-          pwd
-          tree
           find . -maxdepth 1 -type d -exec bash -c '
             echo "$1"
             if [ -f "$1/package.json" ]; then
+              cd $1 && pwd
               echo "Updating version in $1/package.json"
               NEW_VERSION="${{ steps.version_info.outputs.NEW_VERSION }}"
-              jq --arg newVersion "$NEW_VERSION" \'.version = $newVersion\' "$1/package.json" > "$1/temp.package.json"
-              mv "$1/temp.package.json" "$1/package.json"
+              jq --arg newVersion "$NEW_VERSION" \'.version = $newVersion\' package.json > temp.package.json
+              mv "temp.package.json" "package.json"
             fi
           ' _ {} \;
 
