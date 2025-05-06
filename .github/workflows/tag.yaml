@@ -24,6 +24,8 @@ jobs:
 
       - name: Bump version in package.json files
         run: |
+          pwd
+          tree
           find . -maxdepth 1 -type d -exec bash -c '
             if [ -f "$1/package.json" ]; then
               echo "Updating version in $1/package.json"
