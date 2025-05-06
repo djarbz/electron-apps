@@ -1,0 +1,46 @@
+name: Build/release
+
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "35 4 * * 0" # WINTER (CST): 10:35PM  Summer (CDT): 11:35PM on SUNDAY
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/build.yaml'
+      - '*/package.json'
+      - '*/app/**'
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Build/release Electron app
+        uses: paneron/action-electron-builder@v1.8.1
+        with:
+          # GitHub token, automatically provided to the action
+          # (No need to define this secret in the repo settings)
+          github_token: ${{ secrets.github_token }}
+
+          # If the commit is tagged with a version (e.g. "v1.0.0"),
+          # release the app after building
+          release: ${{ startsWith(github.ref, 'refs/tags/v') }}
+
+          # Directory where NPM/Yarn commands should be run (default: ".")
+          package_root: ./electron.build
+          # Name of the optional NPM build script which is executed before electron-builder (default: "build")
+          build_script_name: "build:pre"
