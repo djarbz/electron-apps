@@ -28,6 +28,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 'latest'
+      
+      - name: debug
+        run: tree
 
       - name: Build/release Electron app
         uses: paneron/action-electron-builder@v1.8.1
