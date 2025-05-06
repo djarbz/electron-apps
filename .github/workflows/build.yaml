@@ -15,6 +15,9 @@ on:
 jobs:
   release:
     runs-on: windows-latest
+    permissions:
+      actions: write
+      contents: write
     strategy:
       matrix:
         app:
