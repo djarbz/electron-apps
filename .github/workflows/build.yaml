@@ -27,10 +27,18 @@ jobs:
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v4
         with:
-          node-version: 'latest'
-      
-      - name: Enable CorePack
-        run: corepack enable
+          node-version: 'lts/*'
+
+      - name: Find and install dependencies
+        run: |
+          corepack enable
+          find . -name "package.json" -type f -print0 | while IFS= read -r -d $'\0' file; do
+            cd "$(dirname "$file")"
+            echo "Installing dependencies in $(pwd)"
+            yarn install --frozen-lockfile
+            echo "-------------------------"
+            cd - > /dev/null
+          done
 
       - name: Build/release Electron app
         uses: paneron/action-electron-builder@v1.8.1
