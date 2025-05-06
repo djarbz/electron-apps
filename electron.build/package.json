@@ -1,7 +1,7 @@
 {
   "name": "electron.build",
   "description": "Playground for Electron.Build",
-  "version": "25.05.06+b1643",
+  "version": "25.05.06+b1830",
   "author": {
     "name": "DJArbz"
   },
@@ -47,7 +47,7 @@
   },
   "scripts": {
     "icon:download:linux": "wget -q https://coder.com/favicon-light.svg -O app/light.svg",
-    "icon:download:win": "powershell -NoProfile -Command \"Invoke-WebRequest -Uri 'https:\/\/coder.com\/favicon-light.svg' -OutFile 'app\/light.svg'\"",
+    "icon:download:win": "powershell -NoProfile -Command \"Invoke-WebRequest -Uri 'https://coder.com/favicon-light.svg' -OutFile 'app/light.svg'\"",
     "icon:download": "yarn icon:download:win",
     "icon:convert": "magick.exe app/light.svg -density 300 -resize 256 -background none app/icon.png",
     "icon:update": "yarn icon:download && tree app /F && yarn icon:convert",
