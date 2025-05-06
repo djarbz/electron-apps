@@ -53,3 +53,5 @@ jobs:
           package_root: ./${{ matrix.app }}
           # Name of the optional NPM build script which is executed before electron-builder (default: "build")
           build_script_name: "build:pre"
+          # Other arguments to pass to the electron-builder command, e.g. configuration overrides (default: "")
+          args: ${{ startsWith(github.ref, 'refs/tags/v') && '--publish always' || '--publish onTagOrDraft' }}
