@@ -25,12 +25,10 @@ jobs:
       - name: Bump version in package.json files
         run: |
           find . -maxdepth 1 -type d -name "[!.]*" -exec bash -c '
-            echo "$1"
             if [ -f "$1/package.json" ]; then
-              cd "$1"; pwd
+              cd "$1"
               echo "Updating version in $1/package.json"
               NEW_VERSION="${{ steps.version_info.outputs.NEW_VERSION }}"
-              echo "VERSION: ${NEW_VERSION}"
               jq --arg newVersion "$NEW_VERSION" '\''.version = $newVersion'\'' "package.json" > "/tmp/package.json"
               mv "/tmp/package.json" "package.json"
             fi
@@ -59,3 +57,8 @@ jobs:
             } catch (error) {
               console.error('Failed to create tag:', error);
             }
+
+      - name: Trigger build
+        run: gh workflow run build.yaml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
