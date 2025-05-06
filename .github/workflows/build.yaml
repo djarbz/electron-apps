@@ -29,12 +29,15 @@ jobs:
         with:
           node-version: 'lts/*'
 
-      - name: Find and install dependencies
+      - name: Install ImageMagick
         run: |
           sudo apt-get update
           sudo apt-get install --no-install-recommends -y imagemagick
+
+      - name: Find and install dependencies
+        run: |
           corepack enable
-          find . -maxdepth 1 -type f -name "package.json" -print0 | while IFS= read -r -d $'\0' file; do
+          find . -maxdepth 2 -type f -name "package.json" -print0 | while IFS= read -r -d $'\0' file; do
             cd "$(dirname "$file")"
             echo "Installing dependencies in $(pwd)"
             yarn install --frozen-lockfile
