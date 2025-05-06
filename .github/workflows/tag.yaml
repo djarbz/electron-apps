@@ -58,7 +58,7 @@ jobs:
               console.error('Failed to create tag:', error);
             }
 
-      # - name: Trigger build
-      #   run: gh workflow run build.yaml
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Trigger build
+        run: gh workflow run build.yaml --ref ${{ steps.version_info.outputs.NEW_VERSION }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
