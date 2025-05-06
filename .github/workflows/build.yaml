@@ -31,6 +31,8 @@ jobs:
 
       - name: Find and install dependencies
         run: |
+          apt update
+          apt-get install --no-install-recommends -y imagemagick
           corepack enable
           find . -name "package.json" -type f -print0 | while IFS= read -r -d $'\0' file; do
             cd "$(dirname "$file")"
